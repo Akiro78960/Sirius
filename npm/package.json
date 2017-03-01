@@ -1,0 +1,22 @@
+{
+  "name": "npm-build-demo",
+  "version": "1.0.0",
+  "description": "Test project",
+  "main": "Web/index.html",
+  "author": "Frédéric Thériault",
+  "license": "MIT",
+
+  "scripts": {
+    "less": "lessc ../Sirius/less/style.less ../Sirius/css/style.css",
+
+    "watch:less": "less-watch-compiler ../Sirius/less ../Sirius/css style.less",
+    "watch": "npm run watch:less"
+  },
+
+  "devDependencies": {
+    "less": "latest",
+    "watch" : "latest",
+    "less-watch-compiler" : "latest"
+  },
+  "dependencies": {}
+}

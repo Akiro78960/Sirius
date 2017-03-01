@@ -10,9 +10,14 @@
 
 		protected function executeAction() {
 			$data = [];
-			$data["username"] = $_POST["username"];
-			$data["pwd"] = $_POST["pwd"];
-			$key = json_decode($this->callAPI("signin", $data));
-			echo $key;
+			if(!empty($_POST["username"]) && !empty($_POST["pwd"])){
+				$data["username"] = $_POST["username"];
+				$data["pwd"] = $_POST["pwd"];
+				$key = json_decode($this->callAPI("signin", $data));
+				$_SESSION["key"]=$key;
+				if(strlen($key) == 40){
+					$_SESSION["username"]=$_POST["username"];
+				}
+			}
 		}
 	}
