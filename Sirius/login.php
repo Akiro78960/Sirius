@@ -1,5 +1,5 @@
 <?php
-	require_once("action/IndexAction.php");
+	require_once("action/loginAction.php");
 
 	$action = new IndexAction();
 	$action->execute();
@@ -7,7 +7,8 @@
 ?>
 		<div class="connectedas">
 			<?php
-			if(!empty($_SESSION["username"]) && !empty($_SESSION["key"])) {
+			if(isset($_SESSION["key"])){
+			if(isset($_SESSION["username"])) {
 			 ?>
 			<h3>Connected as : <?= $_SESSION["username"] ?></h3>
 			key : <?= $_SESSION["key"] ?>
@@ -16,8 +17,8 @@
 			  ?>
 			  <h3>Not connected </h3>
 			  <?php if(!isset($_SESSION["username"])){ ?>
-				  Erreur: <?= $_SESSION["key"] ?>
-			  <?php }} ?>
+				  Key: <?= $_SESSION["key"] ?>
+			  <?php }}} ?>
 		</div>
 		<div class="login-page">
 			<h1>Connexion</h1>

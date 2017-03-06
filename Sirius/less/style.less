@@ -1,20 +1,35 @@
-@color-login : purple;
+@color-theme : red;
+@border-style : 3px solid darken(@color-theme,40%);
 
 .login-page{
     width:350px;
     margin: auto;
 }
 .login-form{
-    color:@color-login;
+    color:darken(@color-theme,20%);
     width:350px;
     border: 1px solid black;
     border-radius: 10px;
     padding: 20px 0px 20px 50px;
 }
-h1{
-    color:@color-login;
-}
 
 .connectedas{
     font-family: Arial;
+}
+
+.menu{
+    text-align: center;
+}
+.menu a{
+    margin: 100px;
+    padding: 1% ;
+    border : @border-style;
+    border-radius: 28px;
+}
+#personnage-details{
+    margin: 50px auto;
+    text-align: center;
+}
+.personnage-champ{
+    margin: 1%;
 }

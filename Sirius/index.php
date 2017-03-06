@@ -3,23 +3,16 @@
 
 	$action = new IndexAction();
 	$action->execute();
+	require_once("partial/header.php")
 ?>
-<!DOCTYPE html>
-<html lang="fr">
-    <head>
-        <title>Sha1</title>
-        <link href="css/global.css" rel="stylesheet" />
-        <meta charset="utf-8"/>
-    </head>
-    <body>
+
 		<div class="sectionKey"></div>
 		<div class="sectionAuthentification">
 			<h1>
-				Sha1 Converter
+				Sirius
 			</h1>
 
-			<div class="formLabel"><label for="texte"> Texte : </label></div>
-			<div class="formInput"><input type="text" name="texte" id="texte" /></div>
+			Menu Principal
 			<div class="formSeparator"></div>
 
 			<div id="result">
