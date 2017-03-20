@@ -19,6 +19,7 @@
 					$_SESSION["username"]=$_POST["username"];
 				}
 				$_SESSION["visibility"] = CommonAction::$VISIBILITY_MEMBER;
+				header("location:monPerso.php");
 			}
 		}
 	}

@@ -1,5 +1,4 @@
 window.onload= function(){
-    console.log("tick");
         displayLoadingScreen()
 
         setTimeout(function () {
@@ -20,7 +19,9 @@ window.onload= function(){
             ///////////ajoute les elements/////////////
             $.each(result, function(index, value){
                 var node = document.createElement("div")
-                node.setAttribute("id", "partie-uniq")
+                node.setAttribute("class", "partie-uniq")
+                node.setAttribute("id", "partie-uniq"+index)
+                node.setAttribute("data-id", result[index].id)
                 document.getElementById("parties-details").appendChild(node)
                 appendField("Nom : " +result[index].name,node)
                 appendField("Niveau : " +result[index].level,node)
@@ -28,8 +29,22 @@ window.onload= function(){
                 appendField("HP : " +result[index].current_hp,node)
                 appendField("Type : " +result[index].type,node)
             })
+            $(".partie-uniq").click( function(){
+                var idgame = this.getAttribute("data-id")
+                console.log(idgame);
+                $.ajax({
+                    type : "POST",
+                    url : "ajaxJoinGame.php",
+                    data : {
+                        id : idgame
+                    }
+                }).done(function(reponse){
+                    console.log(reponse);
+                    location.href = "game.php"
+                })
+            })
         })
-    }, 2000);
+    }, 2000)
 
 }
 
@@ -54,5 +69,4 @@ function displayLoadingScreen(){
     node.src = "images/loading.gif"
     node.id = "loadingimg"
     div.appendChild(node)
-
 }
