@@ -11,4 +11,5 @@
             <a href="index.php">Acceuil</a>
             <a href="login.php">Se Connecter</a>
             <a href="monPerso.php">Mon Personnage</a>
+            <a href="parties.php">Parties en cours</a>
         </div>

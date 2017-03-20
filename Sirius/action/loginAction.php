@@ -18,6 +18,7 @@
 				if(strlen($key) == 40){
 					$_SESSION["username"]=$_POST["username"];
 				}
+				$_SESSION["visibility"] = CommonAction::$VISIBILITY_MEMBER;
 			}
 		}
 	}

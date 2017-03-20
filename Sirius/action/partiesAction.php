@@ -1,7 +1,7 @@
 <?php
 	require_once("action/CommonAction.php");
 
-	class MonPersoAction extends CommonAction {
+	class PartiesAction extends CommonAction {
 
 		public function __construct() {
 			parent::__construct(CommonAction::$VISIBILITY_MEMBER);
