@@ -8,8 +8,8 @@
     </head>
     <body>
         <div class="menu">
-            <a href="index.php">Acceuil</a>
-            <a href="login.php">Se Connecter</a>
-            <a href="monPerso.php">Mon Personnage</a>
-            <a href="parties.php">Parties en cours</a>
+            <div class = "menu-item"><a href="index.php">Acceuil</a></div>
+            <div class = "menu-item"><a href="login.php">Se Connecter</a></div>
+            <div class = "menu-item"><a href="monPerso.php">Mon Personnage</a></div>
+            <div class = "menu-item"><a href="parties.php">Parties en cours</a></div>
         </div>

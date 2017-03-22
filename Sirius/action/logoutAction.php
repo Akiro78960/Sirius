@@ -16,6 +16,6 @@
             $_SESSION["username"]=null;
 			$_SESSION["jsonPerso"]=null;
 			session_destroy();
-            header("location:index.php");
+            header("location:login.php");
 		}
 	}

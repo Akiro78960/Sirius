@@ -7,6 +7,7 @@
 ?>
     <script src="JS/jquery.min.js"></script>
     <script src="JS/parties.js"></script>
+		<main>
 		<div class="parties">
 			<h1>
 				Parties en cours :
@@ -15,5 +16,6 @@
             </div>
 			<div style="clear:both"></div>
 		</div>
+	</main>
     </body>
 </html>

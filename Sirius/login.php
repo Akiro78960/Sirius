@@ -5,6 +5,8 @@
 	$action->execute();
 	require_once("partial/header.php")
 ?>
+<main>
+<div class="login-page">
 		<div class="connectedas">
 			<?php
 			if(isset($_SESSION["key"])){
@@ -20,7 +22,6 @@
 				  Key: <?= $_SESSION["key"] ?>
 			  <?php }}} ?>
 		</div>
-		<div class="login-page">
 			<h1>Connexion</h1>
 		    <div class="login-form">
 		        <form action="login.php" method="post">
@@ -50,5 +51,6 @@
 		        </form>
 		    </div>
 		</div>
+	</main>
     </body>
 </html>

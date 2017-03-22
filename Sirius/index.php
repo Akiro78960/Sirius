@@ -6,17 +6,15 @@
 	require_once("partial/header.php")
 ?>
 
-		<div class="sectionKey"></div>
-		<div class="sectionAuthentification">
+
+		<main>
 			<h1>
 				Sirius
 			</h1>
 
-			Menu Principal
-			<div class="formSeparator"></div>
-
-			<div id="result">
+			<h2>Menu Principal</h2>
+			<div class="text-intro">
 			</div>
-		</div>
+		</main>
     </body>
 </html>

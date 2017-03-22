@@ -7,12 +7,14 @@
 ?>
         <script src="JS/jquery.min.js"></script>
         <script src="JS/monPerso.js"></script>
-		<div class="Personnage">
-			<h1>
-				Mon Personnage
-			</h1>
-            <div id="personnage-details">
-            </div>
-		</div>
+		<main>
+			<div class="Personnage">
+				<h1>
+					Mon Personnage
+				</h1>
+	            <div id="personnage-details">
+	            </div>
+			</div>
+		</main>
     </body>
 </html>

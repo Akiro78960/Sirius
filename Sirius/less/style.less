@@ -1,32 +1,65 @@
 @import url('https://fonts.googleapis.com/css?family=Baloo+Bhaina');
 
-@color-theme : red;
-@border-style : 3px solid darken(@color-theme,40%);
+@color-theme : white;
+@border-style : 3px solid darken(white,20%);
+@background-theme: linear-gradient(0deg,rgba(0, 0, 160, 0.8),rgba(80, 80, 200, 0.7));
 
+body{
+    background-image:    linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)),url("../images/bg.jpg");
+    background-size: auto;
+}
+
+main{
+    color: white;
+    font-size: 1.2rem;
+    text-align: center;
+    font-family: 'Baloo Bhaina', cursive;
+}
 .login-page{
-    width:350px;
+    width:500px;
+    height: 500px;
     margin: auto;
+    color: @color-theme;
+    background: @background-theme;
+    border: @border-style;
+    border-radius: 5px;
+    text-align: center;
 }
 .login-form{
-    color:darken(@color-theme,20%);
-    width:350px;
-    border: 1px solid black;
-    border-radius: 10px;
-    padding: 20px 0px 20px 50px;
+    margin: 20px 175px;
+    text-align: left;
 }
 
 .connectedas{
     font-family: Arial;
 }
+.connectedas a{
+    color: darken(@color-theme, 20%);
+}
 
 .menu{
     text-align: center;
 }
+
+.menu-item{
+    display: inline-block;
+    height: 178px;
+    width: 161px;
+    padding: 100px 1% 0 1%;
+    margin-top: -30px;
+    // border : @border-style;
+    background-image: url("../images/signhanging.png");
+    background-size:161px;
+    background-repeat: no-repeat;
+    // background-color: red;
+}
 .menu a{
-    margin: 100px;
-    padding: 1% ;
-    border : @border-style;
-    border-radius: 28px;
+    margin-left: -42px;
+    font-family: 'Baloo Bhaina', cursive;
+    font-size: 1em;
+    color: black;
+    text-decoration: none;
+    text-shadow: 1px 1px 1px gray;
 }
 #personnage-details{
     margin: 50px auto;
@@ -37,20 +70,32 @@
 }
 .parties{
     text-align: center;
-    margin: 50px auto;
-    font-family: 'Baloo Bhaina', cursive;
+    margin: 10px auto;
+    font-size: 0.9em;
 }
 .partie-uniq{
     border: @border-style;
-    border-radius: 10px;
+    border-radius: 7px;
     margin: 10px;
     float: left;
     width: 180px;
     height: 200px;
+    background: @background-theme;
 }
 .partie-uniq:hover{
     border: 8px solid darken(@color-theme,40%);
-    background-color: rgba(255,100,100,0.2);
+    background-color: rgba(50,50,150,1);
     width: 170px;
     height: 190px;
+}
+#personnage-details{
+    width:350px;
+    height: 500px;
+    margin: auto;
+    padding: 50px;
+    color: @color-theme;
+    background: @background-theme;
+    border: @border-style;
+    border-radius: 5px;
+    text-align: center;
 }
