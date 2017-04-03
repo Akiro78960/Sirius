@@ -6,6 +6,8 @@
 	require_once("partial/header.php")
 ?>
     <script src="JS/jquery.min.js"></script>
+    <script src="JS/gameClasses.js"></script>
+    <script src="JS/sprite.js"></script>
     <script src="JS/game.js"></script>
 		<div class="Game">
 			<h1>
@@ -13,6 +15,7 @@
 			</h1>
             <div id="canevas-holder">
 				<canvas id="canvas" width="800" height="600"><canvas>
+				<img src="images/dragon.gif">
             </div>
 		</div>
     </body>

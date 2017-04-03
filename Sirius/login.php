@@ -13,7 +13,7 @@
 			if(isset($_SESSION["username"])) {
 			 ?>
 			<h3>Connected as : <?= $_SESSION["username"] ?></h3>
-			key : <?= $_SESSION["key"] ?>
+			<?= $_SESSION["key"] ?>
 			<a href="logout.php">Logout</a>
 			 <?php }else{
 			  ?>

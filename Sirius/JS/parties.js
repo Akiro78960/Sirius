@@ -32,16 +32,28 @@ window.onload= function(){
             $(".partie-uniq").click( function(){
                 var idgame = this.getAttribute("data-id")
                 console.log(idgame);
-                $.ajax({
-                    type : "POST",
-                    url : "ajaxJoinGame.php",
-                    data : {
-                        id : idgame
-                    }
-                }).done(function(reponse){
-                    console.log(reponse);
-                    location.href = "game.php"
-                })
+                ////////////////////////////////////////////
+                $(".partie-uniq").fadeOut(0)
+                $(this).css({
+                    position: "absolute",
+                    left: "40%",
+                    top:"0%"
+                 }, 400)
+                 $(this).fadeIn(200, function() {
+
+                 });
+                 $(this).animate({top: "40%"}, 500).animate({height: "100%", width: "90%", opacity: "0.3", top:"0%", left:"0%", fontSize:"5em"}, 500, function(){
+                     $.ajax({
+                         type : "POST",
+                         url : "ajaxJoinGame.php",
+                         data : {
+                             id : idgame
+                         }
+                     }).done(function(reponse){
+                         console.log(reponse);
+                         location.href = "game.php"
+                     })
+                 })
             })
         })
     }, 2000)
