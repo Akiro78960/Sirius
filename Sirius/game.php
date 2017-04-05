@@ -13,10 +13,18 @@
 			<h1>
 				Game
 			</h1>
+			<!-- pour loading screen -->
+			<div id="LoadingDiv">
+			</div>
             <div id="canevas-holder">
 				<canvas id="canvas" width="800" height="600"><canvas>
-				<img src="images/dragon.gif">
             </div>
+			<div id="buttons-holder">
+				<div id="button1" style="background-image: url(images/WoodSignAlpha.png);width:200px;height:84px;" onclick="clickButton1()"></div>
+				<div id="button2" style="background-image: url(images/WoodSignAlpha.png);width:200px;height:84px;" onclick="clickButton2()"></div>
+				<div id="button3" style="background-image: url(images/WoodSignAlpha.png);width:200px;height:84px;" onclick="clickButton3()"></div>
+			</div>
+
 		</div>
     </body>
 </html>

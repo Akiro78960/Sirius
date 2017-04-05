@@ -1,8 +1,21 @@
+var anim = 0
 window.onload= function(){
         displayLoadingScreen()
+        setTimeout(function(){
+            //////////enleve le loadingScreen/////////////
+            var div = document.getElementById("parties-details")
+            div.innerHTML=""
+        }, 2500)
+        ajaxrefresh()
 
-        setTimeout(function () {
-        document.getElementById("personnage-details")
+
+
+}
+
+function ajaxrefresh(){
+    setTimeout(function () {
+    document.getElementById("personnage-details")
+    if(!anim){
         $.ajax({
             type : "POST",
             url : "ajaxParties.php",
@@ -11,11 +24,7 @@ window.onload= function(){
         }).done(function(reponse){
             result = JSON.parse(reponse)
 
-            //////////enleve le loadingScreen/////////////
-            var div = document.getElementById("parties-details")
-            div.removeChild(document.getElementById("chargement"))
-            div.removeChild(document.getElementById("loadingimg"))
-
+            document.getElementById("parties-details").innerHTML=""
             ///////////ajoute les elements/////////////
             $.each(result, function(index, value){
                 var node = document.createElement("div")
@@ -32,32 +41,34 @@ window.onload= function(){
             $(".partie-uniq").click( function(){
                 var idgame = this.getAttribute("data-id")
                 console.log(idgame);
+                anim=1
                 ////////////////////////////////////////////
                 $(".partie-uniq").fadeOut(0)
                 $(this).css({
                     position: "absolute",
                     left: "40%",
                     top:"0%"
-                 }, 400)
-                 $(this).fadeIn(200, function() {
+                }, 400)
+                $(this).fadeIn(200, function() {
 
-                 });
-                 $(this).animate({top: "40%"}, 500).animate({height: "100%", width: "90%", opacity: "0.3", top:"0%", left:"0%", fontSize:"5em"}, 500, function(){
-                     $.ajax({
-                         type : "POST",
-                         url : "ajaxJoinGame.php",
-                         data : {
-                             id : idgame
-                         }
-                     }).done(function(reponse){
-                         console.log(reponse);
-                         location.href = "game.php"
-                     })
-                 })
+                });
+                $(this).animate({top: "40%"}, 500).animate({height: "100%", width: "90%", opacity: "0.3", top:"0%", left:"0%", fontSize:"5em"}, 500, function(){
+                    $.ajax({
+                        type : "POST",
+                        url : "ajaxJoinGame.php",
+                        data : {
+                            id : idgame
+                        }
+                    }).done(function(reponse){
+                        console.log(reponse);
+                        location.href = "game.php"
+                    })
+                })
             })
+            ajaxrefresh()
         })
-    }, 2000)
-
+    }
+}, 2550)
 }
 
 function appendField(str, index){
