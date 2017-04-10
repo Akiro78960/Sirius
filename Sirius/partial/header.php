@@ -21,6 +21,9 @@
                     <?php }?>
                     </div>
 
-            <div class = "menu-item" id="item3"><a href="monPerso.php">Mon Personnage</a></div>
+            <div class = "menu-item" id="item3"><a href="monPerso.php">
+                <?php if(isset($_COOKIE["username"])){
+                    echo $_COOKIE["username"];
+                }else{echo "Mon Personnage";}?></a></div>
             <div class = "menu-item" id="item4"><a href="parties.php">Parties en cours</a></div>
         </div>

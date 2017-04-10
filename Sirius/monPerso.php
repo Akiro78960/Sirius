@@ -10,7 +10,10 @@
 		<main>
 			<div class="Personnage">
 				<h1>
-					Mon Personnage
+					<?php
+					if(isset($_COOKIE["username"])){
+						echo $_COOKIE["username"];
+					}?>
 				</h1>
 	            <div id="personnage-details">
 	            </div>

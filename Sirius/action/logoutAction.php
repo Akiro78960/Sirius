@@ -15,6 +15,9 @@
             $_SESSION["key"]=null;
             $_SESSION["username"]=null;
 			$_SESSION["jsonPerso"]=null;
+			if(isset($_COOKIE["username"])){
+				setcookie("username", "", time() - 3600);
+			}
 			session_destroy();
             header("location:login.php");
 		}

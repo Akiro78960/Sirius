@@ -9,6 +9,10 @@ var skill = []
 var cooldown = 120
 var nbSkill = null
 var partiefinie=false
+var ally = []
+var imgHero2 = new Image()
+var imgHero3 = new Image()
+var imgHero4 = new Image()
 
 
 $(document).ready(function() {
@@ -22,9 +26,13 @@ $(document).ready(function() {
         ctx = document.getElementById("canvas").getContext("2d")
         img = new Image()
         dragonImage = new Image()
+
         playerimg .src = "images/Hero.png"
         dragonImage.src="images/dragon-sprite.png"
         img.src="images/background.png"
+        imgHero2.src="images/Hero2.png"
+        imgHero3.src="images/Hero3.png"
+        imgHero4.src="images/Hero4.png"
 
         dragon = sprite({
             width:384,
@@ -45,6 +53,17 @@ $(document).ready(function() {
             previousReponse = JSON.parse(reponse)
             boss = new Boss(previousReponse.game.hp, previousReponse.game.max_hp, previousReponse.game.name)
             player = new Player(previousReponse.player.name, previousReponse.player.level, previousReponse.player.hp, previousReponse.player.max_hp, previousReponse.player.mp, previousReponse.player.max_mp)
+            for (var i = 0; i < previousReponse.other_players.length; i++) {
+                if(i==0){
+                    ally[i] = new Ally(previousReponse.other_players[i].name, previousReponse.other_players[i].level, previousReponse.other_players[i].hp, previousReponse.other_players[i].max_hp, previousReponse.other_players[i].mp, previousReponse.other_players[i].max_mp, previousReponse.other_players[i].welcome_text, 45, 325, imgHero2)
+                }else if(i==1){
+                    ally[i] = new Ally(previousReponse.other_players[i].name, previousReponse.other_players[i].level, previousReponse.other_players[i].hp, previousReponse.other_players[i].max_hp, previousReponse.other_players[i].mp, previousReponse.other_players[i].max_mp, previousReponse.other_players[i].welcome_text, 210, 330, imgHero3)
+                }else{
+                    ally[i] = new Ally(previousReponse.other_players[i].name, previousReponse.other_players[i].level, previousReponse.other_players[i].hp, previousReponse.other_players[i].max_hp, previousReponse.other_players[i].mp, previousReponse.other_players[i].max_mp, previousReponse.other_players[i].welcome_text, 205, 200, imgHero4)
+                }
+                ally[i].spawn()
+            }
+            nbAlly = previousReponse.other_players.length
             for (var i = 0; i < previousReponse.player.skills.length; i++) {
                 skill[i]=new Skill(previousReponse.player.skills[i].name, previousReponse.player.skills[i].dmg, previousReponse.player.skills[i].cost)
             }
@@ -73,13 +92,33 @@ function callAjax(){
                 ctx.fillText("GAME", 250, 200)
                 ctx.fillText("OVER", 250, 420)
             }else if (reponse == "\"GAME_NOT_FOUND_WIN\"") {
-                console.log("win");
+                partiefinie=true
+                ctx.font="150px monospace"
+                ctx.fillStyle="red"
+                ctx.fillText("VICTORY", 100, 330)
             }else if(reponse != "\"USER_NOT_FOUND\""){
                 previousReponse = nextReponse
                 nextReponse = JSON.parse(reponse)
                 console.log(nextReponse)
                 boss.update(nextReponse.game.hp, nextReponse.game.last_target)
                 player.update(nextReponse.player.hp, nextReponse.player.mp)
+
+                for (var i = 0; i < nextReponse.other_players.length; i++) {
+                        if(ally[i] == null){
+                            if(i==0){
+                                ally[i] = new Ally(nextReponse.other_players[i].name, nextReponse.other_players[i].level, nextReponse.other_players[i].hp, nextReponse.other_players[i].max_hp, nextReponse.other_players[i].mp, nextReponse.other_players[i].max_mp, nextReponse.other_players[i].welcome_text, 45, 325, imgHero2)
+                            }else if(i==1){
+                                ally[i] = new Ally(nextReponse.other_players[i].name, nextReponse.other_players[i].level, nextReponse.other_players[i].hp, nextReponse.other_players[i].max_hp, nextReponse.other_players[i].mp, nextReponse.other_players[i].max_mp, nextReponse.other_players[i].welcome_text, 210, 330, imgHero3)
+                            }else{
+                                ally[i] = new Ally(nextReponse.other_players[i].name, nextReponse.other_players[i].level, nextReponse.other_players[i].hp, nextReponse.other_players[i].max_hp, nextReponse.other_players[i].mp, nextReponse.other_players[i].max_mp, nextReponse.other_players[i].welcome_text, 205, 200, imgHero4)
+                            }
+                            ally[i].spawn()
+                        }
+                        ally[i].update(nextReponse.other_players[i].hp, nextReponse.other_players[i].mp)
+                        if(nextReponse.other_players[i].attacked != "--"){
+                            ally[i].attack()
+                        }
+                }
             }
         })
         callAjax()
@@ -94,6 +133,13 @@ function tick(){
         dragon.render(550,200)
         drawInfoBoss()
         drawInfoPlayer()
+        for (var i = 0; i < ally.length; i++) {
+            // console.log(i);
+            if(ally[i].cooldown > 0  && ally[i].cooldown!= 120){
+                ally[i].spawn()
+            }
+        }
+        drawInfoAlly()
         drawButtons()
         requestAnimationFrame(tick)
     }
@@ -151,6 +197,24 @@ function drawInfoPlayer(){
     ctx.drawImage(playerimg, player.x, player.y, 100, 100)
 }
 
+function drawInfoAlly(){
+    for (var i = 0; i < ally.length; i++) {
+        ctx.strokeStyle="blue"
+        ctx.strokeRect(140+i*120, 450, 100 ,80)
+        ctx.fillStyle="white"
+        ctx.font="16px Courier New"
+        ctx.fillText(ally[i].name, 160+i*120, 465, 50, 50)
+        ctx.strokeStyle="black"
+        ctx.strokeRect(150+i*120, 473, 70, 12)
+        ctx.fillStyle="red"
+        ctx.fillRect(151+i*120, 474, (ally[i].HP/ally[i].maxHP)*68, 10)
+        ctx.strokeRect(150+i*120, 493, 70, 12)
+        ctx.fillStyle="blue"
+        ctx.fillRect(151+i*120, 494, (ally[i].MP/ally[i].maxMP)*68, 10)
+        ctx.drawImage(ally[i].img, ally[i].x, ally[i].y, 100, 100)
+    }
+}
+
 function drawButtons(){
     for (var i = 0; i < 3; i++) {
         var node = document.getElementById("button"+(i+1))
@@ -200,7 +264,7 @@ function clickButton1(){
 }
 
 function clickButton2(){
-    if(cooldown==120){
+    if(cooldown==120 && (player.MP>=skill[1].cost)){
         $.ajax({
             url: 'ajaxskills.php',
             type: 'POST',
@@ -217,7 +281,7 @@ function clickButton2(){
 }
 
 function clickButton3(){
-    if(cooldown==120){
+    if(cooldown==120 && (player.MP>=skill[0].cost)){
         $.ajax({
             url: 'ajaxskills.php',
             type: 'POST',

@@ -17,6 +17,7 @@
 				$_SESSION["key"]=$key;
 				if(strlen($key) == 40){
 					$_SESSION["username"]=$_POST["username"];
+					setcookie("username", $_POST["username"], time() + 120);
 				}
 				$_SESSION["visibility"] = CommonAction::$VISIBILITY_MEMBER;
 				header("location:monPerso.php");
