@@ -8,6 +8,7 @@ var ctx = null
 var skill = []
 var cooldown = 120
 var nbSkill = null
+var partiefinie=false
 
 
 $(document).ready(function() {
@@ -23,6 +24,7 @@ $(document).ready(function() {
         dragonImage = new Image()
         playerimg .src = "images/Hero.png"
         dragonImage.src="images/dragon-sprite.png"
+        img.src="images/background.png"
 
         dragon = sprite({
             width:384,
@@ -63,7 +65,16 @@ function callAjax(){
             url : "ajaxUpdate.php",
             data : {}
         }).done(function(reponse){
-            if(reponse != "\"USER_NOT_FOUND\""){
+            console.log("ajax");
+            if(reponse == "\"GAME_NOT_FOUND_LOST\""){
+                partiefinie=true
+                ctx.font="120px monospace"
+                ctx.fillStyle="red"
+                ctx.fillText("GAME", 250, 200)
+                ctx.fillText("OVER", 250, 420)
+            }else if (reponse == "\"GAME_NOT_FOUND_WIN\"") {
+                console.log("win");
+            }else if(reponse != "\"USER_NOT_FOUND\""){
                 previousReponse = nextReponse
                 nextReponse = JSON.parse(reponse)
                 console.log(nextReponse)
@@ -77,14 +88,15 @@ function callAjax(){
 }
 
 function tick(){
-    img.src="images/background.png"
-    ctx.drawImage(img, 0, 0)
-    dragon.update()
-    dragon.render(550,200)
-    drawInfoBoss()
-    drawInfoPlayer()
-    drawButtons()
-    requestAnimationFrame(tick)
+    if (!partiefinie) {
+        ctx.drawImage(img, 0, 0)
+        dragon.update()
+        dragon.render(550,200)
+        drawInfoBoss()
+        drawInfoPlayer()
+        drawButtons()
+        requestAnimationFrame(tick)
+    }
 }
 
 function timerCooldown(){
@@ -161,7 +173,7 @@ function drawButtons(){
             node.appendChild(document.createElement("br"))
             texte = document.createTextNode("dmg: " + skill[i].dmg)
             node.appendChild(texte)
-                    node.appendChild(document.createElement("br"))
+            node.appendChild(document.createElement("br"))
             texte = document.createTextNode("MP: " + skill[i].cost)
             node.appendChild(texte)
         }
@@ -214,7 +226,7 @@ function clickButton3(){
             }
         })
         .done(function() {
-            nbSkill=1
+            nbSkill=3
             player.doSkill3()
         })
         timerCooldown()

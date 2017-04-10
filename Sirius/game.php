@@ -10,9 +10,6 @@
     <script src="JS/sprite.js"></script>
     <script src="JS/game.js"></script>
 		<div class="Game">
-			<h1>
-				Game
-			</h1>
 			<!-- pour loading screen -->
 			<div id="LoadingDiv">
 			</div>

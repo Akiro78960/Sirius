@@ -44,8 +44,11 @@ class Player{
             this.x-=20
         }else if(cooldown>20){
             this.x-=12
-        }else if(cooldown>12){
-            this.x-=5
+        }else if(cooldown>15){
+            this.x-=3
+        }else{
+            this.x=50
+            this.y=225
         }
     }
     doSkill2(){
@@ -57,6 +60,7 @@ class Player{
             this.x-=10
         }else if(cooldown == 80){
             this.x=50
+            this.y=225
         }
     }
     doSkill3(){
