@@ -1,4 +1,4 @@
-var dragon = null
+var dragon = null //contient uniquement la sprite
 var boss = null
 var player = null
 var playerimg = new Image()
@@ -84,7 +84,7 @@ function callAjax(){
             url : "ajaxUpdate.php",
             data : {}
         }).done(function(reponse){
-            console.log("ajax");
+            console.log(reponse);
             if(reponse == "\"GAME_NOT_FOUND_LOST\""){
                 partiefinie=true
                 ctx.font="120px monospace"
@@ -99,8 +99,10 @@ function callAjax(){
             }else if(reponse != "\"USER_NOT_FOUND\""){
                 previousReponse = nextReponse
                 nextReponse = JSON.parse(reponse)
-                console.log(nextReponse)
                 boss.update(nextReponse.game.hp, nextReponse.game.last_target)
+                if(nextReponse.game.attacked){
+                    boss.attack()
+                }
                 player.update(nextReponse.player.hp, nextReponse.player.mp)
 
                 for (var i = 0; i < nextReponse.other_players.length; i++) {
@@ -130,7 +132,12 @@ function tick(){
     if (!partiefinie) {
         ctx.drawImage(img, 0, 0)
         dragon.update()
-        dragon.render(550,200)
+        dragon.render(boss.x,boss.y)
+
+        if (boss.cooldown!=120) {
+            boss.attack()
+            console.log("atk");
+        }
         drawInfoBoss()
         drawInfoPlayer()
         for (var i = 0; i < ally.length; i++) {

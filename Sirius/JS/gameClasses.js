@@ -3,10 +3,28 @@ class Boss{
         this.HP = HP
         this.maxHP = maxHP
         this.name=name
+        this.x = 550
+        this.y =200
+        this.cooldown = 120
     }
     update(HP, lastTarget){
         this.HP=HP
         this.lastTarget = lastTarget
+    }
+    attack(){
+        this.cooldown--
+        if(this.cooldown >= 110){
+            this.x-=10
+        }else if(this.cooldown >= 100){
+            this.x-=20
+        }else if(this.cooldown >= 85){
+            this.x-=50
+        }else if(this.cooldown == 80){
+            this.x = 550
+        }
+        if(this.cooldown <=0){
+            this.cooldown = 120
+        }
     }
 }
 
