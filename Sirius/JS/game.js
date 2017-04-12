@@ -84,7 +84,6 @@ function callAjax(){
             url : "ajaxUpdate.php",
             data : {}
         }).done(function(reponse){
-            console.log(reponse);
             if(reponse == "\"GAME_NOT_FOUND_LOST\""){
                 partiefinie=true
                 ctx.font="120px monospace"
@@ -99,6 +98,7 @@ function callAjax(){
             }else if(reponse != "\"USER_NOT_FOUND\""){
                 previousReponse = nextReponse
                 nextReponse = JSON.parse(reponse)
+                console.log(nextReponse);
                 boss.update(nextReponse.game.hp, nextReponse.game.last_target)
                 if(nextReponse.game.attacked){
                     boss.attack()
@@ -136,14 +136,15 @@ function tick(){
 
         if (boss.cooldown!=120) {
             boss.attack()
-            console.log("atk");
         }
         drawInfoBoss()
         drawInfoPlayer()
         for (var i = 0; i < ally.length; i++) {
-            // console.log(i);
-            if(ally[i].cooldown > 0  && ally[i].cooldown!= 120){
+            if(ally[i].cooldownSpawn!= 120){
                 ally[i].spawn()
+            }
+            if(ally[i].cooldownAttack != 120){
+                ally[i].attack()
             }
         }
         drawInfoAlly()

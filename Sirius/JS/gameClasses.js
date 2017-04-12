@@ -121,48 +121,52 @@ class Ally{
         this.img = img
         this.saveX = x
         this.saveY = y
-        this.cooldown = 120
+        this.cooldownSpawn = 120
+        this.cooldownAttack = 120
     }
     update(HP, MP){
         this.HP=HP
         this.MP = MP
     }
     spawn(){
-        if(this.cooldown == 120){
+        if(this.cooldownSpawn == 120){
             this.x -=300
-        }else if(this.cooldown >= 90){
+        }else if(this.cooldownSpawn >= 90){
             this.x+=10
-        }else if(this.cooldown <=0){
+        }else if(this.cooldownSpawn <=0){
             this.x = this.saveX
         }
         ctx.fillStyle = "white"
         ctx.fillText(this.text, this.saveX-40, this.y-5, 120)
 
-        this.cooldown-=1
-        if(this.cooldown <=0){
-            this.cooldown = 120
+        this.cooldownSpawn-=1
+        if(this.cooldownSpawn <=0){
+            this.cooldownSpawn = 120
         }
         // console.log(this.cooldown)
     }
     attack(){
-        console.log("attacked")
-        if(cooldown!=120 && cooldown>112){
+        this.cooldownAttack--
+        if(this.cooldownAttack!=120 && this.cooldownAttack>112){
             this.y-=5
-        }else if(cooldown>104){
+        }else if(this.cooldownAttack>104){
             this.y+=5
-        }else if(cooldown>96){
+        }else if(this.cooldownAttack>96){
             this.y-=5
-        }else if(cooldown>88){
+        }else if(this.cooldownAttack>88){
             this.y+=5
-        }else if(cooldown>80){
+        }else if(this.cooldownAttack>80){
             this.x+=5
-        }else if(cooldown>60){
+        }else if(this.cooldownAttack>60){
             this.x+=12
-        }else if(cooldown>50){
+        }else if(this.cooldownAttack>50){
             this.x+=20
         }else{
             this.x=this.saveX
             this.y=this.saveY
+        }
+        if(this.cooldownAttack <=0){
+            this.cooldownAttack = 120
         }
     }
 }
